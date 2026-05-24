@@ -243,32 +243,21 @@ JSON.parse(localStorage.getItem("consultas")) || [];
 
 mostrarConsultas();
 
+// Substitua o trecho do JavaScript pela versão corrigida abaixo:
+
 function adicionarConsulta(){
+    let paciente = document.getElementById("paciente").value;
+    // Corrigido para buscar o ID correto que está no HTML
+    let data = document.getElementById("dataAgenda").value; 
+    let horario = document.getElementById("horario").value;
+    let servico = document.getElementById("servico").value;
 
-    let paciente =
-    document.getElementById("paciente").value;
-
-    let data =
-    document.getElementById("data").value;
-
-    let horario =
-    document.getElementById("horario").value;
-
-    let servico =
-    document.getElementById("servico").value;
-
-    if(
-        paciente === "" ||
-        data === "" ||
-        horario === "" ||
-        servico === ""
-    ){
-        alert("Preencha os campos");
+    if(paciente === "" || data === "" || horario === "" || servico === ""){
+        alert("Preencha todos os campos");
         return;
     }
 
     let consulta = {
-
         paciente,
         data,
         horario,
@@ -277,15 +266,13 @@ function adicionarConsulta(){
 
     consultas.push(consulta);
 
-    localStorage.setItem(
-        "consultas",
-        JSON.stringify(consultas)
-    );
+    localStorage.setItem("consultas", JSON.stringify(consultas));
 
     mostrarConsultas();
 
+    // Limpar campos após adicionar
     document.getElementById("paciente").value = "";
-    document.getElementById("data").value = "";
+    document.getElementById("dataAgenda").value = ""; // Também corrigido aqui
     document.getElementById("horario").value = "";
     document.getElementById("servico").value = "";
 }
