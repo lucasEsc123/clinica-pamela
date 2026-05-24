@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financeiro Clínica</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial;
+        }
+
+        body {
+            display: flex;
+            background: #f8f6f2;
+        }
+
+        /* MENU */
+        .sidebar{
+    width:240px;
+    height:100vh;
+    background:#c3c2c0;
+    color:#6f4e37;
+    padding:30px;
+    border-right:1px solid #d8cfc5;
+}
+
+.sidebar h2{
+    margin-bottom:40px;
+    font-size:28px;
+    color:#b58766;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    margin-bottom:25px;
+}
+
+.sidebar a{
+    color:#b58766;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+}
+
+
+.sidebar a:hover{
+    opacity:0.7;
+}
+
+.sidebar-footer {
+            text-align: center;
+            width: 100%;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-menu {
+            width: 280px;
+            height: 280px;
+            object-fit: contain;
+        }
+
+        /* CONTEÚDO */
+        .main {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topo h1 {
+            color: #e6c7ae;
+            font-size: 38px;
+        }
+
+        .btn {
+            background: #6f4e37;
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h3 {
+            color: #777;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .card p {
+            color: #6f4e37;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        /* FORMULÁRIO */
+        .formulario {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .formulario input,
+        .formulario select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            min-width: 180px;
+        }
+
+        /* TABELA */
+        .tabela-box {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #6f4e37;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #faf7f3;
+        }
+
+        .Receita {
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .Despesa {
+            color: red;
+            font-weight: bold;
+        }
+
+        .remover {
+            background: #a94442;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* GRÁFICOS */
+        .graficos {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .grafico {
+            background: #111;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .grafico h2 {
+            color: #e6c7ae;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div>
+            <h2>Clínica</h2>
+            <ul>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="agenda.html">Agenda</a></li>
+                <li class="submenu-item"><a href="fluxo.html">Fluxo de Caixa</a></li>
+                <li class="submenu-item"><a href="receitas.html">Receitas</a></li>
+                <li class="submenu-item"><a href="despesas.html">Despesas</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <img src="logopam.png" alt="Logo Pamela Zaparoli" class="logo-menu">
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="topo">
+            <h1>Fluxo de Caixa</h1>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Total Entradas</h3>
+                <p id="entradas">R$ 0</p>
+            </div>
+            <div class="card">
+                <h3>Total Saídas</h3>
+                <p id="saidas">R$ 0</p>
+            </div>
+            <div class="card">
+                <h3>Saldo</h3>
+                <p id="saldo">R$ 0</p>
+            </div>
+            <div class="card">
+                <h3>Movimentações</h3>
+                <p id="quantidade">0</p>
+            </div>
+        </div>
+
+        <div class="formulario">
+            <label for="data">Digite a data:</label>
+            <input type="text" id="data" placeholder="DD/MM/AAAA" maxlength="10" oninput="formatarData(this)">
+            <input type="text" id="descricao" placeholder="Descrição">
+            <input type="number" id="valor" placeholder="Valor">
+            <select id="tipo">
+                <option value="Receita">Receita</option>
+                <option value="Despesa">Despesa</option>
+            </select>
+            <button class="btn" onclick="adicionarMovimento()">Nova movimentação</button>
+        </div>
+
+        <div class="tabela-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-financeiro"></tbody>
+            </table>
+        </div>
+
+        <div class="graficos">
+            <div class="grafico">
+                <h2>Resumo Financeiro</h2>
+                <canvas id="graficoPizza"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let movimentacoes = JSON.parse(localStorage.getItem("movimentos")) || [];
+        
+        // Globais de controle dos cards
+        let totalEntradas = 0;
+        let totalSaidas = 0;
+        let quantidade = 0;
+        
+        // Variável global para armazenar a instância do gráfico Chart.js
+        let meuGrafico = null;
+
+        // Inicia a aplicação carregando os dados na tela
+        carregarMovimentos();
+
+        function carregarMovimentos() {
+            let tabela = document.getElementById("tabela-financeiro");
+            tabela.innerHTML = ""; // Limpa a tabela antes de renderizar para não duplicar
+
+            // Reseta contadores antes do loop de cálculo
+            totalEntradas = 0;
+            totalSaidas = 0;
+            quantidade = 0;
+
+            movimentacoes.forEach(function (item, index) {
+                let linha = document.createElement("tr");
+                linha.innerHTML = `
+                    <td>${item.data}</td>
+                    <td>${item.descricao}</td>
+                    <td class="${item.tipo}">${item.tipo}</td>
+                    <td>R$ ${item.valor}</td>
+                    <td>
+                        <button class="remover" onclick="removerMovimento(${index})">Remover</button>
+                    </td>
+                `;
+                tabela.appendChild(linha);
+
+                quantidade++;
+
+                if (item.tipo === "Receita") {
+                    totalEntradas += Number(item.valor);
+                } else {
+                    totalSaidas += Number(item.valor);
+                }
+            });
+
+            atualizarCards();
+            atualizarGrafico();
+        }
+
+        function adicionarMovimento() {
+            let data = document.getElementById("data").value;
+            let descricao = document.getElementById("descricao").value;
+            let valor = parseFloat(document.getElementById("valor").value);
+            let tipo = document.getElementById("tipo").value;
+
+            if (data === "" || descricao === "" || isNaN(valor)) {
+                alert("Preencha todos os campos corretamente.");
+                return;
+            }
+
+            let movimento = { data, descricao, valor, tipo };
+            movimentacoes.push(movimento);
+
+            localStorage.setItem("movimentos", JSON.stringify(movimentacoes));
+
+            // Limpa os campos do formulário para o próximo envio
+            document.getElementById("data").value = "";
+            document.getElementById("descricao").value = "";
+            document.getElementById("valor").value = "";
+
+            // Recarrega as listas, recalcula totais e atualiza o gráfico dinamicamente
+            carregarMovimentos();
+        }
+
+        function removerMovimento(index) {
+            // Remove o item selecionado do array de dados
+            movimentacoes.splice(index, 1);
+            
+            // Atualiza o banco local do navegador
+            localStorage.setItem("movimentos", JSON.stringify(movimentacoes));
+            
+            // Re-renderiza toda a interface com os novos valores
+            carregarMovimentos();
+        }
+
+        function atualizarCards() {
+            document.getElementById("entradas").innerHTML = "R$ " + totalEntradas;
+            document.getElementById("saidas").innerHTML = "R$ " + totalSaidas;
+            document.getElementById("saldo").innerHTML = "R$ " + (totalEntradas - totalSaidas);
+            document.getElementById("quantidade").innerHTML = quantidade;
+        }
+
+        function formatarData(input) {
+            let v = input.value.replace(/\D/g, "");
+            if (v.length > 2) v = v.substring(0, 2) + "/" + v.substring(2);
+            if (v.length > 5) v = v.substring(0, 5) + "/" + v.substring(5, 9);
+            input.value = v;
+        }
+
+        function atualizarGrafico() {
+            const ctx = document.getElementById('graficoPizza').getContext('2d');
+
+            // Se o gráfico já existe criado na tela, destrói a versão antiga para renderizar os dados novos por cima
+            if (meuGrafico !== null) {
+                meuGrafico.destroy();
+            }
+
+            // Cria a nova instância atualizada com os valores recalculados das variáveis globais
+            meuGrafico = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Receitas', 'Despesas'],
+                    datasets: [{
+                        data: [totalEntradas, totalSaidas],
+                        backgroundColor: ['#3498db', '#e74c3c'],
+                        borderColor: '#111',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#fff',
+                                font: { size: 14 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

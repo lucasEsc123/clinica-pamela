@@ -1,0 +1,106 @@
+/* RESET GERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    background: #f5f1eb;
+}
+
+/* SIDEBAR */
+/* SIDEBAR - Paleta Clara com Textos Marrons */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #fdfbf7; /* Fundo bem claro (quase branco, com um toque quente) */
+    color: #6f4e37;      /* Cor principal dos textos (marrom) */
+    padding: 30px;
+    border-right: 1px solid #e7ddd2; /* Borda sutil para separar do conteúdo */
+}
+
+.sidebar h2 {
+    margin-bottom: 40px;
+    font-size: 30px;
+    color: #b58766;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: 25px;
+}
+
+/* Links do menu agora são marrons */
+.sidebar a {
+    color: #8b6b55; /* Marrom um pouco mais suave para links */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.sidebar a:hover {
+    color: #4a3324; /* Marrom escuro ao passar o mouse (hover) */
+}
+
+/* Título Financeiro */
+.titulo-financeiro {
+    color: #b58766;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e7ddd2; /* Detalhe elegante */
+    padding-bottom: 5px;
+}
+
+/* Itens do Submenu */
+.submenu-item {
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.submenu-item a {
+    color: #a08470; /* Um marrom mais claro para itens secundários */
+    font-size: 16px;
+}
+
+.submenu-item a:hover {
+    color: #6f4e37;
+}
+
+/* TABELA E ELEMENTOS */
+table {
+    width: 100%;
+    margin-top: 30px;
+    background: white;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #5d1f31;
+    color: white;
+}
+
+.remover {
+    background: #a94442;
+    color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    cursor: pointer;
+}

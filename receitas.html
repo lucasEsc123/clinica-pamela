@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receitas</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial;
+        }
+
+        body {
+            display: flex;
+            background: #f8f6f2;
+        }
+
+        /* MENU */
+        .sidebar{
+    width:240px;
+    height:100vh;
+    background:#c3c2c0;
+    color:#6f4e37;
+    padding:30px;
+    border-right:1px solid #d8cfc5;
+}
+
+.sidebar h2{
+    margin-bottom:40px;
+    font-size:28px;
+    color:#b58766;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    margin-bottom:25px;
+}
+
+.sidebar a{
+    color:#b58766;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.sidebar a:hover{
+    opacity:0.7;
+}
+
+.sidebar-footer {
+            text-align: center;
+            width: 100%;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-menu {
+            width: 280px;
+            height: 280px;
+            object-fit: contain;
+        }
+
+        /* FINANCEIRO */
+        .financeiro-box {
+            position: relative;
+        }
+
+        .menu-financeiro {
+            cursor: pointer;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 25px;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: #b58766;
+            padding: 12px;
+            border-radius: 10px;
+            width: 190px;
+            z-index: 999;
+        }
+
+        .submenu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* CONTEÚDO */
+        .main {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .titulo {
+            color: #6f4e37;
+            font-size: 52px;
+            margin-bottom: 30px;
+        }
+
+        /* CARDS */
+        .cards {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #111;
+            color: white;
+            padding: 30px;
+            border-radius: 22px;
+            width: 250px;
+        }
+
+        .card h3 {
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 40px;
+            color: #e6c7ae;
+            font-weight: bold;
+        }
+
+        /* FORM */
+        .form-box {
+            background: #111;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .form-box input {
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #3b3b3b;
+            color: white;
+            min-width: 220px;
+        }
+
+        .btn {
+            background: #8b5e3c;
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        /* TABELA */
+        table {
+            width: 100%;
+            margin-top: 40px;
+            border-collapse: collapse;
+            background: #050505;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #6f4e37;
+            color: white;
+            padding: 18px;
+            text-align: left;
+        }
+
+        td {
+            padding: 18px;
+            border-bottom: 1px solid #222;
+            color: white;
+        }
+
+        .remover {
+            background: #a94442;
+            color: white;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button {
+            border: none;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+
+   <div class="sidebar">
+        <div>
+            <h2>Clínica</h2>
+            <ul>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="agenda.html">Agenda</a></li>
+                <li class="submenu-item"><a href="fluxo.html">Fluxo de Caixa</a></li>
+                <li class="submenu-item"><a href="receitas.html">Receitas</a></li>
+                <li class="submenu-item"><a href="despesas.html">Despesas</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <img src="logopam.png" alt="Logo Pamela Zaparoli" class="logo-menu">
+        </div>
+    </div>
+
+    <div class="main">
+        <h1 class="titulo">Receitas</h1>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Total Receitas</h3>
+                <p id="total-receitas">R$ 0</p>
+            </div>
+
+            <div class="card">
+                <h3>Contas</h3>
+                <p id="total-contas">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Mês Atual</h3>
+                <p id="mes-atual">R$ 0</p>
+            </div>
+        </div>
+
+        <div class="tabela-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>X</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-financeiro"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Captura a data de hoje para checar a virada do mês
+        let hoje = new Date();
+        let diaAtual = hoje.getDate();
+        
+        // Formata o mês e ano atual para comparar (ex: "05/2026")
+        let mesAnoAtualObjeto = String(hoje.getMonth() + 1).padStart(2, '0') + "/" + hoje.getFullYear();
+
+        // SE FOR DIA 1: Verifica se já limpamos o mês anterior para evitar loops de limpeza
+        if (diaAtual === 1) {
+            let ultimaLimpeza = localStorage.getItem("ultima_limpeza_mes");
+            if (ultimaLimpeza !== mesAnoAtualObjeto) {
+                localStorage.setItem("movimentos", JSON.stringify([])); // Zera as movimentações
+                localStorage.setItem("ultima_limpeza_mes", mesAnoAtualObjeto); // Registra que o dia 1 deste mês já limpou
+            }
+        }
+
+        // Carrega os dados atualizados
+        let movimentacoes = JSON.parse(localStorage.getItem("movimentos")) || [];
+        let tabela = document.getElementById("tabela-financeiro");
+
+        let totalGeral = 0;
+        let totalMesAtual = 0;
+        let quantidadeContas = 0;
+
+        movimentacoes.forEach(function (item, index) {
+            if (item.tipo === "Receita") {
+                // SOMA 1 NO CONTADOR DE CONTAS RECEBIDAS
+                quantidadeContas++;
+
+                // SOMA NO TOTAL GERAL
+                totalGeral += Number(item.valor);
+
+                // SE A DATA DA RECEITA FOR DESSE MÊS, SOMA NO CARD "MÊS ATUAL"
+                // Espera o formato padrão "DD/MM/AAAA", extraindo o "MM/AAAA" com substring
+                if (item.data && item.data.substring(3) === mesAnoAtualObjeto) {
+                    totalMesAtual += Number(item.valor);
+                }
+
+                // Cria a linha na tabela
+                let linha = document.createElement("tr");
+                linha.innerHTML = `
+                    <td>${item.data}</td>
+                    <td>${item.descricao}</td>
+                    <td>R$ ${item.valor}</td>
+                    <td>
+                        <button class="remover" onclick="removerMovimento(${index})">X</button>
+                    </td>
+                `;
+                tabela.appendChild(linha);
+            }
+        });
+
+        // Atualiza os valores nos respectivos cards na tela
+        document.getElementById("total-receitas").innerHTML = "R$ " + totalGeral;
+        document.getElementById("total-contas").innerHTML = quantidadeContas;
+        document.getElementById("mes-atual").innerHTML = "R$ " + totalMesAtual;
+
+        function removerMovimento(index) {
+            movimentacoes.splice(index, 1);
+            localStorage.setItem("movimentos", JSON.stringify(movimentacoes));
+            location.reload();
+        }
+    </script>
+</body>
+
+</html>

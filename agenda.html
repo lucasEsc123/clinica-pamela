@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agenda Clínica</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            display:flex;
+            background:#f8f6f2;
+        }
+
+        /* MENU */
+.sidebar{
+    width:240px;
+    height:100vh;
+    background:#c3c2c0;
+    color:#6f4e37;
+    padding:30px;
+    border-right:1px solid #d8cfc5;
+}
+
+.sidebar h2{
+    margin-bottom:40px;
+    font-size:28px;
+    color:#b58766;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    margin-bottom:25px;
+}
+
+.sidebar a{
+    color:#b58766;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.sidebar a:hover{
+    opacity:0.7;
+}
+
+.sidebar-footer {
+            text-align: center;
+            width: 100%;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-menu {
+            width: 280px;
+            height: 280px;
+            object-fit: contain;
+        }
+
+        /* CONTEÚDO */
+
+        .main{
+            flex:1;
+            padding:40px;
+        }
+
+        .titulo{
+            font-size:40px;
+            color:#6f4e37;
+            margin-bottom:30px;
+        }
+
+        /* FORMULÁRIO */
+
+        .formulario{
+            background:white;
+            padding:25px;
+            border-radius:20px;
+            display:flex;
+            gap:15px;
+            flex-wrap:wrap;
+            margin-bottom:30px;
+            box-shadow:0 0 15px rgba(0,0,0,0.08);
+        }
+
+        .formulario input,
+        .formulario select{
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:10px;
+            min-width:180px;
+        }
+
+        .formulario button{
+            padding:12px 20px;
+            border:none;
+            border-radius:10px;
+            background:#6f4e37;
+            color:white;
+            cursor:pointer;
+            font-weight:bold;
+        }
+
+        .formulario button:hover{
+            opacity:0.9;
+        }
+
+        /* TABELA */
+
+        table{
+            width:100%;
+            background:white;
+            border-collapse:collapse;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 0 15px rgba(0,0,0,0.08);
+        }
+
+        th{
+            background:#6f4e37;
+            color:white;
+            padding:18px;
+            text-align:left;
+        }
+
+        td{
+            padding:18px;
+            border-bottom:1px solid #eee;
+        }
+
+        tr:hover{
+            background:#faf7f3;
+        }
+
+        /* BOTÃO REMOVER */
+
+        .remover{
+            background:#a94442;
+            color:white;
+            border:none;
+            padding:8px 14px;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- MENU -->
+
+    <div class="sidebar">
+        <div>
+            <h2>Clínica</h2>
+            <ul>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="agenda.html">Agenda</a></li>
+                <li class="submenu-item"><a href="fluxo.html">Fluxo de Caixa</a></li>
+                <li class="submenu-item"><a href="receitas.html">Receitas</a></li>
+                <li class="submenu-item"><a href="despesas.html">Despesas</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <img src="logopam.png" alt="Logo Pamela Zaparoli" class="logo-menu">
+        </div>
+    </div>
+
+
+    <!-- CONTEÚDO -->
+
+    <div class="main">
+
+        <h1 class="titulo">Agenda de Consultas</h1>
+
+        <!-- FORMULÁRIO -->
+
+        <div class="formulario">
+
+            <input type="text" id="paciente"
+            placeholder="Nome do paciente">
+
+            <input
+            type="text"
+            id="data"
+            placeholder="DD/MM"
+            maxlength="5">
+
+            <input type="time" id="horario">
+
+            <input type="text" id="servico"
+            placeholder="Descrição da consulta">
+
+            <button onclick="adicionarConsulta()">
+                Adicionar
+            </button>
+
+        </div>
+
+        <!-- TABELA -->
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Paciente</th>
+                    <th>Serviço</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+
+            <tbody id="tabela-agenda">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script>
+
+let consultas =
+JSON.parse(localStorage.getItem("consultas")) || [];
+
+mostrarConsultas();
+
+function adicionarConsulta(){
+
+    let paciente =
+    document.getElementById("paciente").value;
+
+    let data =
+    document.getElementById("data").value;
+
+    let horario =
+    document.getElementById("horario").value;
+
+    let servico =
+    document.getElementById("servico").value;
+
+    if(
+        paciente === "" ||
+        data === "" ||
+        horario === "" ||
+        servico === ""
+    ){
+        alert("Preencha os campos");
+        return;
+    }
+
+    let consulta = {
+
+        paciente,
+        data,
+        horario,
+        servico
+    };
+
+    consultas.push(consulta);
+
+    localStorage.setItem(
+        "consultas",
+        JSON.stringify(consultas)
+    );
+
+    mostrarConsultas();
+
+    document.getElementById("paciente").value = "";
+    document.getElementById("data").value = "";
+    document.getElementById("horario").value = "";
+    document.getElementById("servico").value = "";
+}
+
+function mostrarConsultas(){
+
+    let tabela =
+    document.getElementById("tabela-agenda");
+
+    tabela.innerHTML = "";
+
+    consultas.forEach(function(item, index){
+
+        let linha =
+        document.createElement("tr");
+
+        linha.innerHTML = `
+
+            <td>${item.data}</td>
+
+            <td>${item.horario}</td>
+
+            <td>${item.paciente}</td>
+
+            <td>${item.servico}</td>
+
+            <td>
+
+                <button class="remover"
+                onclick="removerConsulta(${index})">
+
+                    X
+
+                </button>
+
+            </td>
+        `;
+
+        tabela.appendChild(linha);
+    });
+
+}
+
+function removerConsulta(index){
+
+    consultas.splice(index, 1);
+
+    localStorage.setItem(
+        "consultas",
+        JSON.stringify(consultas)
+    );
+
+    mostrarConsultas();
+}
+
+</script>
+
+
+</body>
+</html>
+
+</body>
+
+</html>
