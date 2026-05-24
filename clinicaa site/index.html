@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Clínica</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+       body {
+    display: flex;
+    background: #f5f1eb;
+    height: 100vh;
+    overflow: hidden;
+}
+
+        /* MENU LATERAL */
+       .sidebar{
+
+    width:240px;
+
+    height:100vh;
+
+    background-color:#c3c2c0;
+
+    color:#b58766;
+
+    padding:30px;
+
+    border-right:1px solid #e7ddd2;
+}
+
+.sidebar h2{
+    margin-bottom:40px;
+    font-size:28px;
+    color:#b58766;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    margin-bottom:25px;
+}
+
+.sidebar a{
+    color:#b58766;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.sidebar a:hover{
+    opacity:0.7;
+}
+
+        /* CONTAINER DA LOGO CENTRALIZADA EM BAIXO */
+        .sidebar-footer {
+            text-align: center;
+            width: 100%;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-menu {
+            width: 280px;
+            height: 280px;
+            object-fit: contain;
+        }
+
+        /* ÁREA DIREITA (CONTEÚDO PRINCIPAL) */
+        .main {
+            flex: 1;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* CARD PRINCIPAL COM A FOTO EM TELA CHEIA */
+        .perfil-card {
+            width: 100%;
+            height: 100vh;
+            /* Definição do arquivo alterado para fotopam.png */
+            background-image: url('fotopam.png'); 
+            background-size: cover;           /* Faz preencher toda a tela lateral */
+            background-position: center center; /* Mantém o foco totalmente centralizado */
+            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* NOME CENTRALIZADO NO TOPO */
+        .perfil-card h1 {
+            position: absolute;
+            top: 45px;
+            font-size: 72px;
+            color: #efe4cf; /* Tom creme elegante */
+            font-family: Georgia, serif;
+            font-weight: normal;
+            z-index: 2;
+            text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6); /* Sombra para leitura perfeita */
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div>
+            <h2>Clínica</h2>
+            <ul>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="agenda.html">Agenda</a></li>
+                <li class="submenu-item"><a href="fluxo.html">Fluxo de Caixa</a></li>
+                <li class="submenu-item"><a href="receitas.html">Receitas</a></li>
+                <li class="submenu-item"><a href="despesas.html">Despesas</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <img src="logopam.png" alt="Logo Pamela Zaparoli" class="logo-menu">
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="perfil-card">
+            <h1>Pamela Zaparoli</h1>
+        </div>
+    </div>
+
+</body>
+
+</html>
