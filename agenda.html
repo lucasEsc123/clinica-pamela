@@ -195,11 +195,13 @@
             <input type="text" id="paciente"
             placeholder="Nome do paciente">
 
-            <input
-            type="text"
-            id="data"
-            placeholder="DD/MM"
-            maxlength="5">
+            <input 
+            type="text" 
+            id="dataAgenda" 
+            placeholder="DD/MM" 
+            maxlength="5" 
+            oninput="formatarData(this)"
+            >
 
             <input type="time" id="horario">
 
@@ -338,6 +340,20 @@ function removerConsulta(index){
 
     mostrarConsultas();
 }
+
+// Função da data (DD/MM automático)
+function formatarData(input) {
+    let v = input.value.replace(/\D/g, "");
+
+    if (v.length > 2) {
+        v = v.substring(0, 2) + "/" + v.substring(2);
+    }
+
+    input.value = v.substring(0, 5);
+}
+</script>
+
+</script>
 
 </script>
 
